@@ -1,0 +1,10 @@
+<nb-card accent="primary" status="warning">
+  <nb-card-header>
+    Cliënten
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item *ngFor="let client of clients" [ngClass]="{'selected': isSelected(client)}">
+      <app-client-row [client]="client" (clientSelected)="onClientSelected(client)"></app-client-row>
+    </nb-list-item>
+  </nb-list>
+</nb-card>

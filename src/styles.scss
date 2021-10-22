@@ -1,0 +1,47 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+
+img.profile-picture {
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+}
+
+.nb-theme-default {
+  app-client-row {
+
+    width: 100%;
+    padding-left: 10px;
+
+    .name {
+      font-size: 1em;
+      font-weight: 700;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  nb-icon.large-icon {
+    font-size: 2em;
+  }
+
+  nb-card-header {
+    border-bottom: none;
+    font-size: 1.25em;
+  }
+
+  nb-list-item.selected {
+    background-color: #ccc;
+  }
+
+  .label {
+    margin-top: 20px;
+  }
+}

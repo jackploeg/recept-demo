@@ -1,0 +1,4 @@
+<nb-layout>
+  <nb-layout-column><app-client-list (clientSelectionChanged)="selectedClient = $event"></app-client-list></nb-layout-column>
+  <nb-layout-column><app-client-details [client]="selectedClient"></app-client-details></nb-layout-column>
+</nb-layout>
