@@ -1,4 +1,7 @@
-<nb-card accent="info" id="recept">
+<nb-layout>
+  <nb-layout-column>
+<form [formGroup]="prescriptionForm" (ngSubmit)="printPrescription()">
+  <nb-card accent="info" id="recept">
     <nb-card-header>
       <h4>RECEPT</h4>
       <h6>Uitgeschreven: {{prescriptionDate | date : 'dd-MM-yyyy'}}</h6>
@@ -6,15 +9,27 @@
     <nb-card-body>
       <div>Patiëntnummer: {{clientNumber}}</div>
       <div>Aflevermethode:</div>
-      <nb-select placeholder="Kies een aflevermethode" [(selected)]="deliveryMethod">
-        <nb-option value="0">Afhalen bij apotheek</nb-option>
-        <nb-option value="1">Thuisbezorgen bij patiënt</nb-option>
+      <nb-select
+        formControlName="deliveryMethod"
+        placeholder="Kies een aflevermethode">
+        <nb-option *ngFor="let method of deliveryMethods" [value]="method.description">{{ method.description }}</nb-option>
       </nb-select>
+      <span
+        *ngIf="!prescriptionForm.get('deliveryMethod')!.valid && prescriptionForm.get('deliveryMethod')!.touched"
+        class="error-message">
+        Kies een aflevermethode
+      </span>
       <div>Recept geldig tot {{endValidDate | date : 'dd-MM-yyyy'}}</div>
-    </nb-card-body>
-  <nb-card-footer>
-    <button nbButton status="primary" (click)="printPrescription()">Afdrukken
-    </button>
 
-  </nb-card-footer>
-</nb-card>
+
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton status="primary" type="submit" [disabled]="!prescriptionForm.valid">Afdrukken
+      </button>
+
+    </nb-card-footer>
+  </nb-card>
+</form>
+  </nb-layout-column>
+</nb-layout>
+

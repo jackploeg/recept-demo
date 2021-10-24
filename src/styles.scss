@@ -19,6 +19,10 @@ img.profile-picture {
   }
 }
 
+nb-select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
 .nb-theme-default {
   app-client-row {
 
