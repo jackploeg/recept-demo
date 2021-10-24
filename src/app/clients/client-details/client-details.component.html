@@ -4,7 +4,7 @@
     <img style="float: right" [src]="'/assets/' + (client.clientNumber) + '.jfif'" class="profile-picture"/>
   </nb-card-header>
   <nb-card-body>
-    <div class="container-fluid">
+    <div>
       <div class="row">
         <div class="label">Cliëntnummer</div>
         <div class="value">{{client.clientNumber}}</div>
@@ -16,6 +16,6 @@
     </div>
   </nb-card-body>
   <nb-card-footer>
-    <button nbButton status="primary">Recept voorschrijven</button>
+    <button nbButton status="primary" (click)='createPrescription()'>Recept voorschrijven</button>
   </nb-card-footer>
 </nb-card>

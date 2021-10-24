@@ -5,8 +5,8 @@ import { PrescriptionComponent } from './prescription/prescription.component';
 
 const routes: Routes = [
   { path: '', component: ClientsComponent},
-  { path: 'clienten', component: ClientsComponent},
-  { path: 'recept/:clientNumber', component: PrescriptionComponent}
+  { path: 'clients', component: ClientsComponent},
+  { path: 'prescription/:clientNumber', component: PrescriptionComponent}
 ];
 
 @NgModule({

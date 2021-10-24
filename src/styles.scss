@@ -12,6 +12,13 @@ img.profile-picture {
   border-radius: 50px;
 }
 
+@media print {
+  .nb-theme-default [nbButton].appearance-filled.status-primary,
+  .nb-theme-default .appearance-filled.status-primary[nbButtonToggle] {
+    display: none;
+  }
+}
+
 .nb-theme-default {
   app-client-row {
 
