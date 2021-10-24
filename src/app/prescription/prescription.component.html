@@ -1,35 +1,69 @@
 <nb-layout>
   <nb-layout-column>
-<form [formGroup]="prescriptionForm" (ngSubmit)="printPrescription()">
   <nb-card accent="info" id="recept">
     <nb-card-header>
       <h4>RECEPT</h4>
       <h6>Uitgeschreven: {{prescriptionDate | date : 'dd-MM-yyyy'}}</h6>
     </nb-card-header>
     <nb-card-body>
-      <div>Patiëntnummer: {{clientNumber}}</div>
-      <div>Aflevermethode:</div>
+      <div class="label">Patiëntnummer</div>
+      <div>{{clientNumber}}</div>
+
+      <form [formGroup]="prescriptionForm" (ngSubmit)="printPrescription()">
+
+      <div class="label">Aflevermethode</div>
       <nb-select
         formControlName="deliveryMethod"
         placeholder="Kies een aflevermethode">
         <nb-option *ngFor="let method of deliveryMethods" [value]="method.description">{{ method.description }}</nb-option>
       </nb-select>
-      <span
+      <div
         *ngIf="!prescriptionForm.get('deliveryMethod')!.valid && prescriptionForm.get('deliveryMethod')!.touched"
         class="error-message">
         Kies een aflevermethode
-      </span>
-      <div>Recept geldig tot {{endValidDate | date : 'dd-MM-yyyy'}}</div>
+      </div>
 
+      <div class="label">Recept geldig tot</div>
+      <div>{{endValidDate | date : 'dd-MM-yyyy'}}</div>
+
+      </form>
+
+      <h2>Medicijnen</h2>
+
+      <div *ngFor="let row of prescription.rows">{{ row.medicine!.description }}</div>
+
+      <nb-card>
+        <nb-card-header>
+          <h6>Voeg een medicijn toe</h6>
+        </nb-card-header>
+        <form [formGroup]="newRowForm">
+          <nb-select
+            formControlName="medicine"
+            placeholder="Kies een medicijn">
+            <nb-option *ngFor="let medicine of medicines" [value]="medicine.description">{{ medicine.description }}</nb-option>
+          </nb-select>
+          <div
+            *ngIf="!newRowForm.get('medicine')!.valid && newRowForm.get('medicine')!.touched"
+            class="error-message">
+            Kies een medicijn
+          </div>
+        </form>
+          <nb-card-footer>
+            <button nbButton status="primary" (click)="addNewRow()" [disabled]="!newRowForm.valid">Voeg toe
+            </button>
+
+          </nb-card-footer>
+
+      </nb-card>
 
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton status="primary" type="submit" [disabled]="!prescriptionForm.valid">Afdrukken
+      <button nbButton status="primary" [disabled]="!prescriptionForm.valid" (click)="printPrescription()">Afdrukken
       </button>
 
     </nb-card-footer>
   </nb-card>
-</form>
+
   </nb-layout-column>
 </nb-layout>
 

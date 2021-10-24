@@ -19,6 +19,10 @@ img.profile-picture {
   }
 }
 
+div.error-message {
+  color: red;
+}
+
 nb-select.ng-invalid.ng-touched {
   border: 1px solid red;
 }
