@@ -1,15 +1,44 @@
 @import 'themes';
 
 @import '~@nebular/theme/styles/globals';
+@import '~@nebular/bootstrap/styles/globals';
 
 @include nb-install() {
   @include nb-theme-global();
+  @include nb-bootstrap-global();
 };
 
 img.profile-picture {
   height: 100px;
   width: 100px;
   border-radius: 50px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#prescriptionForm {
+  input[type="text"]:disabled, input[readonly] {
+    border: none;
+    color: #333;
+    background-color: transparent;
+  }
+
+  .prescription-item-row {
+    margin-top: 10px;
+
+    input {
+      margin-left: 10px;
+    }
+
+    .instructions {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
 }
 
 @media print {

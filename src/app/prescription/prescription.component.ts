@@ -14,15 +14,12 @@ import { PrescriptionRow } from '../prescription/prescription-row/prescription-r
 export class PrescriptionComponent implements OnInit {
 
   prescriptionForm : FormGroup;
-  newRowForm: FormGroup;
+  //newRowForm: FormGroup;
 
-  clientNumber : string;
+  clientNumber : string = '';
   prescriptionDate: Date = new Date();
-  endValidDate: Date = new Date();
-  deliveryMethod: number = 0;
-
-  prescription : Prescription;
-  newPrescriptionRow : PrescriptionRow;
+  endDateValid: Date = new Date();
+  deliveryMethod: string = '';
 
   medicines: Medicine[];
 
@@ -34,42 +31,22 @@ export class PrescriptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.clientNumber = this.route.snapshot.paramMap.get("clientNumber")!;
-
-    this.prescriptionForm = new FormGroup({
-      'deliveryMethod': new FormControl(null, Validators.required)
-    });
-
-    this.newRowForm = new FormGroup({
-      'medicine': new FormControl(null, Validators.required)
-    });
-
-    this.endValidDate.setFullYear(this.endValidDate.getFullYear() + 2);
-
     this.medicines = this.medicineService.getMedicines();
-
-    this.newPrescriptionRow = new PrescriptionRow(
-        null, null, null, null
-    );
-
-    this.prescription = new Prescription( this.prescriptionDate,
-                                     this.clientNumber,
-                                     []
-                                   );
+    this.initForm();
   }
 
-  addNewRow() {
-    console.log(this.newRowForm.value);
-    // TODO construct new medicine + prescriptionRow
-    this.prescription.addRow(this.newRowForm.value);
-    this.newRowForm = new FormGroup({
-      'medicine': new FormControl(null, Validators.required)
-    });
-  }
-  newRowComplete() : boolean {
-    return this.newPrescriptionRow.medicine != null;
+  initForm() {
+      this.prescriptionForm = new FormGroup({
+        'clientNumber': new FormControl(this.clientNumber),
+        'prescriptionDate': new FormControl(this.prescriptionDate),
+        'endDateValid': new FormControl(this.endDateValid),
+        'deliveryMethod': new FormControl(null, Validators.required)
+      });
+      this.endDateValid.setFullYear(this.endDateValid.getFullYear() + 2);
   }
 
   printPrescription() {
+    // TODO navigate to printContents
     console.log(this.prescriptionForm);
 //        let printContents = document.getElementById("recept")!.innerHTML;
 //        let originalContents = document.body.innerHTML;

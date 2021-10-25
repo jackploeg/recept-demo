@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbIconModule, NbCardModule, NbListModule, NbButtonModule,
-         NbSelectModule } from '@nebular/theme';
+         NbSelectModule, NbRadioModule, NbInputModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { ClientsComponent } from './clients/clients.component';
@@ -36,10 +36,12 @@ import { ClientRowComponent } from './clients/client-list/client-row/client-row.
     NbLayoutModule,
     NbEvaIconsModule,
     NbIconModule,
+    NbInputModule,
     NbCardModule,
     NbListModule,
     NbButtonModule,
     NbSelectModule,
+    NbRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

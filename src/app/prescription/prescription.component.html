@@ -1,69 +1,84 @@
 <nb-layout>
   <nb-layout-column>
-  <nb-card accent="info" id="recept">
-    <nb-card-header>
-      <h4>RECEPT</h4>
-      <h6>Uitgeschreven: {{prescriptionDate | date : 'dd-MM-yyyy'}}</h6>
-    </nb-card-header>
-    <nb-card-body>
-      <div class="label">Patiëntnummer</div>
-      <div>{{clientNumber}}</div>
+    <form [formGroup]="prescriptionForm" id="prescriptionForm" (ngSubmit)="printPrescription()">
 
-      <form [formGroup]="prescriptionForm" (ngSubmit)="printPrescription()">
+      <nb-card accent="info" id="recept">
 
-      <div class="label">Aflevermethode</div>
-      <nb-select
-        formControlName="deliveryMethod"
-        placeholder="Kies een aflevermethode">
-        <nb-option *ngFor="let method of deliveryMethods" [value]="method.description">{{ method.description }}</nb-option>
-      </nb-select>
-      <div
-        *ngIf="!prescriptionForm.get('deliveryMethod')!.valid && prescriptionForm.get('deliveryMethod')!.touched"
-        class="error-message">
-        Kies een aflevermethode
-      </div>
-
-      <div class="label">Recept geldig tot</div>
-      <div>{{endValidDate | date : 'dd-MM-yyyy'}}</div>
-
-      </form>
-
-      <h2>Medicijnen</h2>
-
-      <div *ngFor="let row of prescription.rows">{{ row.medicine!.description }}</div>
-
-      <nb-card>
         <nb-card-header>
-          <h6>Voeg een medicijn toe</h6>
+          <h4>RECEPT</h4>
         </nb-card-header>
-        <form [formGroup]="newRowForm">
-          <nb-select
-            formControlName="medicine"
-            placeholder="Kies een medicijn">
-            <nb-option *ngFor="let medicine of medicines" [value]="medicine.description">{{ medicine.description }}</nb-option>
-          </nb-select>
-          <div
-            *ngIf="!newRowForm.get('medicine')!.valid && newRowForm.get('medicine')!.touched"
-            class="error-message">
-            Kies een medicijn
+
+        <nb-card-body>
+          <div class="label">Patiëntnummer</div>
+          <div>
+            <input nbInput
+                   type="text"
+                   readonly
+                   id="clientNumber"
+                   formControlName="clientNumber">
           </div>
-        </form>
-          <nb-card-footer>
-            <button nbButton status="primary" (click)="addNewRow()" [disabled]="!newRowForm.valid">Voeg toe
-            </button>
 
-          </nb-card-footer>
+          <div class="label">Datum</div>
+          <div>
+            <input nbInput
+                   type="text"
+                   readonly
+                   id="prescriptionDate"
+                   value="{{prescriptionDate | date : 'dd-MM-yyyy'}}">
+          </div>
 
+          <div class="label">Aflevermethode</div>
+          <nb-radio-group id="deliveryMethod">
+            <nb-radio
+              *ngFor="let method of deliveryMethods" [value]="method.description">
+              {{ method.description }}
+            </nb-radio>
+          </nb-radio-group>
+
+          <div class="label">Recept geldig tot</div>
+          <div>
+            <input nbInput
+                   type="text"
+                   readonly
+                   id="endDateValid"
+                   value="{{endDateValid | date : 'dd-MM-yyyy'}}">
+          </div>
+
+          <h2>Medicijnen</h2>
+
+          <!--          <div *ngFor="let row of prescription.rows">{{ row.medicine!.description }}</div>-->
+
+          <nb-card>
+            <nb-card-header>
+              <!--          <button nbButton status="primary" (click)="addNewRow()" [disabled]="!newRowForm.valid">Voeg toe&ndash;&gt;-->
+              <!--              </button>  formControlName="medicine"-->
+            </nb-card-header>
+            <nb-card-body class="prescription-item-rows">
+              <div class="prescription-item-row">
+                <nb-select
+                  placeholder="Kies een medicijn"
+                  style="float:left">
+                  <nb-option *ngFor="let medicine of medicines" [value]="medicine.description">{{ medicine.description
+                    }}
+                  </nb-option>
+
+                </nb-select>
+                <input nbInput type="text" placeholder="Verpakkingseenheid"/>
+                <input nbInput type="text" placeholder="Aantal"/>
+                <div class="clearfix"></div>
+                <input nbInput fullWidth type="text" class="instructions" placeholder="Instructies"/>
+              </div>
+            </nb-card-body>
+          </nb-card>
+
+        </nb-card-body>
+        <nb-card-footer>
+          <button nbButton status="primary" type="submit" [disabled]="!prescriptionForm.valid">
+            Afdrukken
+          </button>
+
+        </nb-card-footer>
       </nb-card>
-
-    </nb-card-body>
-    <nb-card-footer>
-      <button nbButton status="primary" [disabled]="!prescriptionForm.valid" (click)="printPrescription()">Afdrukken
-      </button>
-
-    </nb-card-footer>
-  </nb-card>
-
+    </form>
   </nb-layout-column>
 </nb-layout>
-
