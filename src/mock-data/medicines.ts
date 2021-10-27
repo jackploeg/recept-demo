@@ -5,12 +5,12 @@ export const MEDICINES: Medicine[] = [
   { description: "Paracetamol 500mg",
     availablePackaging: [
       { quantity: 5,
-        unit: "strips",
+        unit: "strip",
         quantityPerUnit: 10,
         subUnit: "tabletten"
       },
       { quantity: 20,
-        unit: "poeders",
+        unit: "poeder",
         quantityPerUnit: 1,
         subUnit: "poeder"
       },
@@ -19,12 +19,12 @@ export const MEDICINES: Medicine[] = [
   { description: "Paracetamol 250mg",
     availablePackaging: [
       { quantity: 5,
-        unit: "strips",
+        unit: "strip",
         quantityPerUnit: 10,
         subUnit: "tabletten"
       },
       { quantity: 3,
-        unit: "strips",
+        unit: "strip",
         quantityPerUnit: 5,
         subUnit: "zetpillen"
       },
@@ -33,7 +33,7 @@ export const MEDICINES: Medicine[] = [
   { description: "Hoestdrank broomhexine hcl 4mg/5ml",
     availablePackaging: [
       { quantity: 1,
-        unit: "flesje",
+        unit: "fles",
         quantityPerUnit: 100,
         subUnit: "milliliter"
       }

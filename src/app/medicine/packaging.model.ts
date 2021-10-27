@@ -5,4 +5,5 @@ export class Packaging {
                public quantityPerUnit: number,
                public subUnit: string) {
   };
+
 }

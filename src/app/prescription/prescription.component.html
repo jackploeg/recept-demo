@@ -23,12 +23,13 @@
             <input nbInput
                    type="text"
                    readonly
+                   date="dd-MM-yyyy"
                    id="prescriptionDate"
-                   value="{{prescriptionDate | date : 'dd-MM-yyyy'}}">
+                   formControlName="prescriptionDate">
           </div>
 
           <div class="label">Aflevermethode</div>
-          <nb-radio-group id="deliveryMethod">
+          <nb-radio-group id="deliveryMethod" formControlName="deliveryMethod">
             <nb-radio
               *ngFor="let method of deliveryMethods" [value]="method.description">
               {{ method.description }}
@@ -41,34 +42,61 @@
                    type="text"
                    readonly
                    id="endDateValid"
-                   value="{{endDateValid | date : 'dd-MM-yyyy'}}">
+                   formControlName="endDateValid">
           </div>
 
           <h2>Medicijnen</h2>
 
-          <!--          <div *ngFor="let row of prescription.rows">{{ row.medicine!.description }}</div>-->
-
           <nb-card>
             <nb-card-header>
-              <!--          <button nbButton status="primary" (click)="addNewRow()" [disabled]="!newRowForm.valid">Voeg toe&ndash;&gt;-->
-              <!--              </button>  formControlName="medicine"-->
             </nb-card-header>
-            <nb-card-body class="prescription-item-rows">
-              <div class="prescription-item-row">
+            <nb-card-body class="prescription-item-rows" formArrayName="prescriptionRows">
+              <div class="prescription-item-row"
+                   *ngFor="let rowCtrl of prescriptionRowsCtrls; let i = index"
+                   [formGroupName]="i">
                 <nb-select
                   placeholder="Kies een medicijn"
+                  formControlName="medicine"
+                  (selectedChange)="medicineChanged(i)"
                   style="float:left">
-                  <nb-option *ngFor="let medicine of medicines" [value]="medicine.description">{{ medicine.description
-                    }}
+                  <nb-option *ngFor="let medicine of medicines"
+                             [value]="medicine.description">
+                    {{ medicine.description }}
                   </nb-option>
 
                 </nb-select>
-                <input nbInput type="text" placeholder="Verpakkingseenheid"/>
-                <input nbInput type="text" placeholder="Aantal"/>
+
+                <nb-select
+                  placeholder="Kies een verpakking"
+                  formControlName="packaging"
+                  style="float:left">
+                  <nb-option *ngFor="let packaging of packagings"
+                             [value]="formatPackaging(packaging)">
+                    {{ formatPackaging(packaging) }}
+                  </nb-option>
+                </nb-select>
+                <input nbInput type="text"
+                       formControlName="number"
+                       placeholder="Aantal"/>
+                <button nbButton type="button"
+                        (click)="deletePrescriptionRow(i)"
+                        status="danger"
+
+                        style="float: right">
+                  <nb-icon icon="trash"></nb-icon>
+                </button>
                 <div class="clearfix"></div>
-                <input nbInput fullWidth type="text" class="instructions" placeholder="Instructies"/>
+                <input nbInput fullWidth type="text"
+                       class="instructions"
+                       formControlName="description"
+                       placeholder="Instructies"/>
               </div>
             </nb-card-body>
+            <nb-card-footer>
+              <button nbButton status="primary"
+                      type="button"
+                      (click)="addNewRow()"><nb-icon icon="plus-circle"></nb-icon>Voeg een medicijn toe</button>
+            </nb-card-footer>
           </nb-card>
 
         </nb-card-body>

@@ -52,8 +52,11 @@ div.error-message {
   color: red;
 }
 
-nb-select.ng-invalid.ng-touched {
+nb-select.ng-invalid.ng-touched,
+.nb-theme-default [nbInput].ng-invalid.ng-touched,
+{
   border: 1px solid red;
+  border-radius: 0.25rem;
 }
 
 .nb-theme-default {
