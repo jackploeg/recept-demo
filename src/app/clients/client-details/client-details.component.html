@@ -1,16 +1,16 @@
 <nb-card *ngIf="!!client" accent="info">
   <nb-card-header>
     <h4 style="float: left">{{client.firstName}} {{client.lastName}}</h4>
-    <img style="float: right" [src]="'/assets/' + (client.clientNumber) + '.jfif'" class="profile-picture"/>
+    <img style="float: right" [src]="'./assets/' + (client.clientNumber) + '.jfif'" class="profile-picture"/>
   </nb-card-header>
   <nb-card-body>
     <div>
       <div class="row">
-        <div class="label">Cliëntnummer</div>
+        <div class="detailslabel">Patiëntnummer</div>
         <div class="value">{{client.clientNumber}}</div>
       </div>
       <div class="row">
-        <div class="label">Geboortedatum</div>
+        <div class="detailslabel">Geboortedatum</div>
         <div class="value">{{client.birthDate | date : 'dd-MM-yyyy'}}</div>
       </div>
     </div>

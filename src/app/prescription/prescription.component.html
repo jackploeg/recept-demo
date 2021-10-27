@@ -9,7 +9,7 @@
         </nb-card-header>
 
         <nb-card-body>
-          <div class="label">Patiëntnummer</div>
+          <div class="detailslabel">Patiëntnummer</div>
           <div>
             <input nbInput
                    type="text"
@@ -18,7 +18,7 @@
                    formControlName="clientNumber">
           </div>
 
-          <div class="label">Datum</div>
+          <div class="detailslabel">Datum</div>
           <div>
             <input nbInput
                    type="text"
@@ -28,7 +28,7 @@
                    formControlName="prescriptionDate">
           </div>
 
-          <div class="label">Aflevermethode</div>
+          <div class="detailslabel">Aflevermethode</div>
           <nb-radio-group id="deliveryMethod" formControlName="deliveryMethod">
             <nb-radio
               *ngFor="let method of deliveryMethods" [value]="method.description">
@@ -36,7 +36,7 @@
             </nb-radio>
           </nb-radio-group>
 
-          <div class="label">Recept geldig tot</div>
+          <div class="detailslabel">Recept geldig tot</div>
           <div>
             <input nbInput
                    type="text"
@@ -48,8 +48,6 @@
           <h2>Medicijnen</h2>
 
           <nb-card>
-            <nb-card-header>
-            </nb-card-header>
             <nb-card-body class="prescription-item-rows" formArrayName="prescriptionRows">
               <div class="prescription-item-row"
                    *ngFor="let rowCtrl of prescriptionRowsCtrls; let i = index"
@@ -69,15 +67,16 @@
                 <nb-select
                   placeholder="Kies een verpakking"
                   formControlName="packaging"
-                  style="float:left">
-                  <nb-option *ngFor="let packaging of packagings"
+                  style="float:left;">
+                  <nb-option *ngFor="let packaging of getPackagings(i)"
                              [value]="formatPackaging(packaging)">
                     {{ formatPackaging(packaging) }}
                   </nb-option>
                 </nb-select>
                 <input nbInput type="text"
-                       formControlName="number"
-                       placeholder="Aantal"/>
+                       formControlName="quantity"
+                       placeholder="Aantal"
+                       style="width:100px;"/>
                 <button nbButton type="button"
                         (click)="deletePrescriptionRow(i)"
                         status="danger"
@@ -88,7 +87,7 @@
                 <div class="clearfix"></div>
                 <input nbInput fullWidth type="text"
                        class="instructions"
-                       formControlName="description"
+                       formControlName="instructions"
                        placeholder="Instructies"/>
               </div>
             </nb-card-body>

@@ -5,12 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class PrescriptionService {
 
-  public recipe : Object;
+  public prescription : Object;
 
   constructor() { }
 
-  selectRecipe(recipe: Object) {
-    this.recipe = recipe;
-    console.log(this.recipe);
+  selectRecipe(prescription: Object) {
+    this.prescription = prescription;
   }
 }

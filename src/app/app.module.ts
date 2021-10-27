@@ -14,8 +14,8 @@ import { ClientsComponent } from './clients/clients.component';
 import { ClientListComponent } from './clients/client-list/client-list.component';
 import { ClientDetailsComponent } from './clients/client-details/client-details.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
-import { PrescriptionRowComponent } from './prescription/prescription-row/prescription-row.component';
 import { ClientRowComponent } from './clients/client-list/client-row/client-row.component';
+import { PrintComponent } from './prescription/print/print.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { ClientRowComponent } from './clients/client-list/client-row/client-row.
     ClientListComponent,
     ClientDetailsComponent,
     PrescriptionComponent,
-    PrescriptionRowComponent,
-    ClientRowComponent
+    ClientRowComponent,
+    PrintComponent
   ],
   imports: [
     BrowserModule,

@@ -6,8 +6,8 @@ import { PrescriptionService } from '../prescription/prescription.service';
 import { Medicine } from '../medicine/medicine.model';
 import { Packaging } from '../medicine/packaging.model';
 import { Prescription } from '../prescription/prescription.model';
-import { PrescriptionRow } from '../prescription/prescription-row/prescription-row.model';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prescription',
@@ -19,13 +19,14 @@ export class PrescriptionComponent implements OnInit {
   prescriptionForm : FormGroup;
 
   medicines: Medicine[];
-  packagings: Packaging[];
+  packagings: Packaging[][] = [[]];
 
   deliveryMethods = [{description:'Afhalen bij apotheek'},{description:'Thuisbezorgen bij patiënt'}];
 
   constructor(private route: ActivatedRoute,
               private medicineService: MedicineService,
-              private prescriptionService: PrescriptionService
+              private prescriptionService: PrescriptionService,
+              private router: Router
              ) { }
 
   ngOnInit(): void {
@@ -60,28 +61,29 @@ export class PrescriptionComponent implements OnInit {
       new FormGroup({
         'medicine': new FormControl('', Validators.required),
         'packaging': new FormControl(''),
-        'number': new FormControl('', [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
-        'description': new FormControl('')
+        'quantity': new FormControl('', [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+        'instructions': new FormControl('')
       })
     );
   }
 
   deletePrescriptionRow(index: number) {
     (<FormArray>this.prescriptionForm.get('prescriptionRows')).removeAt(index);
+    this.packagings.splice(index,1);
   }
 
   medicineChanged(index: number) {
-    console.log('medicine changed');
-    console.log(event);
-    console.log((<FormArray>this.prescriptionForm.get('prescriptionRows')).controls[index].get('medicine')!.value);
     let selectedMedicine = (<FormArray>this.prescriptionForm.get('prescriptionRows')).controls[index].get('medicine')!.value;
 
       for (let medicine of this.medicines) {
         if (selectedMedicine === medicine.description) {
-          this.packagings = medicine.availablePackaging;
-          console.log(this.packagings);
+          this.packagings[index] = medicine.availablePackaging;
         }
      }
+  }
+
+  getPackagings(index: number) {
+    return this.packagings.length >= index ? this.packagings[index] : [];
   }
 
   formatPackaging(packaging: Packaging) : string {
@@ -89,8 +91,11 @@ export class PrescriptionComponent implements OnInit {
       case 'stuks': {
         return ('stuks');
       }
+      case 'poeder': {
+              return ('doos met ' + packaging.quantity + ' poeders ');
+      }
       case 'strip': {
-        return ('' + packaging.quantity + ' strips van ' + packaging.quantityPerUnit + ' tabletten');
+        return ('doos met ' + packaging.quantity + ' strips van ' + packaging.quantityPerUnit + ' ' + packaging.subUnit);
       }
       case 'fles': {
         return ('fles van ' + packaging.quantityPerUnit + ' milliliter');
@@ -102,17 +107,7 @@ export class PrescriptionComponent implements OnInit {
   }
 
   printPrescription() {
-    // TODO navigate to printContents
-    console.log(this.prescriptionForm);
     this.prescriptionService.selectRecipe(this.prescriptionForm.value);
-//        let printContents = document.getElementById("recept")!.innerHTML;
-//        let originalContents = document.body.innerHTML;
-//
-//        document.body.innerHTML = printContents;
-//
-//        window.print();
-//
-//        document.body.innerHTML = originalContents;
-//        window.location.reload();
+    this.router.navigate(['print']);
   }
 }

@@ -2,6 +2,7 @@
 
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/bootstrap/styles/globals';
+@import '~bootstrap/dist/css/bootstrap.css';
 
 @include nb-install() {
   @include nb-theme-global();
@@ -12,6 +13,11 @@ img.profile-picture {
   height: 100px;
   width: 100px;
   border-radius: 50px;
+}
+
+.detailslabel {
+  width: 150px;
+  font-weight: 700;
 }
 
 .clearfix::after {
@@ -29,9 +35,12 @@ img.profile-picture {
 
   .prescription-item-row {
     margin-top: 10px;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 0.25em;
 
-    input {
-      margin-left: 10px;
+    nb-select {
+      margin-right: 10px;
     }
 
     .instructions {
@@ -41,13 +50,11 @@ img.profile-picture {
   }
 }
 
-@media print {
-  .nb-theme-default [nbButton].appearance-filled.status-primary,
-  .nb-theme-default .appearance-filled.status-primary[nbButtonToggle] {
-    display: none;
-  }
+.medicineRow {
+  margin-top: 10px;
+  border: 1px solid gray;
+  padding: 10px;
 }
-
 div.error-message {
   color: red;
 }

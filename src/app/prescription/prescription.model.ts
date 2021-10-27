@@ -2,13 +2,12 @@ import { PrescriptionRow } from './prescription-row/prescription-row.model';
 
 export class Prescription {
 
-  constructor( public date: Date,
+  constructor( public prescriptionDate: Date,
                public clientNumber: string,
-               public rows: PrescriptionRow[]
+               public deliveryMethod: string,
+               public endDateValid: Date,
+               public prescriptionRows: PrescriptionRow[]
              ) {
   };
 
-  addRow(row : PrescriptionRow) {
-    this.rows.push(row);
-  }
 }
