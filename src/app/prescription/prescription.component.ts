@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
+import { Subscription } from 'rxjs';
 import { MedicineService } from '../medicine/medicine.service';
 import { PrescriptionService } from '../prescription/prescription.service';
 import { Medicine } from '../medicine/medicine.model';
@@ -14,9 +15,10 @@ import { Router } from '@angular/router';
   templateUrl: './prescription.component.html',
   styleUrls: ['./prescription.component.scss']
 })
-export class PrescriptionComponent implements OnInit {
+export class PrescriptionComponent implements OnInit, OnDestroy {
 
   prescriptionForm : FormGroup;
+  medicineSubscription: Subscription;
 
   medicines: Medicine[];
   packagings: Packaging[][] = [[]];
@@ -30,9 +32,18 @@ export class PrescriptionComponent implements OnInit {
              ) { }
 
   ngOnInit(): void {
-    //this.clientNumber = this.route.snapshot.paramMap.get("clientNumber")!;
-    this.medicines = this.medicineService.getMedicines();
+    this.medicineSubscription = this.medicineService.getMedicines()
+        .subscribe( medicines => {
+          this.medicines = medicines;
+        }
+    );
     this.initForm();
+  }
+
+  ngOnDestroy() : void {
+    if (this.medicineSubscription) {
+      this.medicineSubscription.unsubscribe();
+    }
   }
 
   initForm() {
@@ -52,7 +63,7 @@ export class PrescriptionComponent implements OnInit {
       });
   }
 
-  get prescriptionRowsCtrls() { // a getter!
+  get prescriptionRowsCtrls() {
     return (<FormArray>this.prescriptionForm.get('prescriptionRows')).controls;
   }
 

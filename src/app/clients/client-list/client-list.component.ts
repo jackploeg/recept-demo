@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ClientsService } from '../clients.service';
 import { Client } from '../client.model'
 
@@ -7,19 +7,14 @@ import { Client } from '../client.model'
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.scss']
 })
-export class ClientListComponent implements OnInit {
-  clients : Client[] = [];
+export class ClientListComponent {
 
   @Output()
   clientSelectionChanged = new EventEmitter<Client>();
 
   private selectedClientNumber : number;
 
-  constructor(private clientsService : ClientsService) { }
-
-  ngOnInit(): void {
-    this.clients = this.clientsService.getClients();
-  }
+  constructor(public clientsService : ClientsService) { }
 
   onClientSelected(client: Client) {
     this.selectedClientNumber = client.clientNumber;

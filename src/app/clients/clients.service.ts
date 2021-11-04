@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Client } from './client.model';
 import { CLIENTS } from '../../mock-data/clients';
 
@@ -7,9 +8,10 @@ import { CLIENTS } from '../../mock-data/clients';
 })
 export class ClientsService {
 
-  constructor() { }
+  constructor() {}
 
-  getClients() : Client[] {
-    return CLIENTS;
+  getClientData() : Observable<Client[]> {
+     return of(CLIENTS);
   }
+
 }
