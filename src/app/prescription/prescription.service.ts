@@ -12,4 +12,8 @@ export class PrescriptionService {
   selectRecipe(prescription: Object) {
     this.prescription = prescription;
   }
+
+  getPrescription() {
+    return this.prescription;
+  }
 }

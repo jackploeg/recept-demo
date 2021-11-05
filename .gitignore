@@ -30,6 +30,11 @@ chrome-profiler-events*.json
 !.vscode/extensions.json
 .history/*
 
+# test-output
+/output
+
+/cypress
+
 # misc
 /.sass-cache
 /connect.lock

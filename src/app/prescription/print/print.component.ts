@@ -14,7 +14,7 @@ export class PrintComponent implements OnInit {
   constructor( private prescriptionService : PrescriptionService) { }
 
   ngOnInit(): void {
-    this.prescription = <Prescription>this.prescriptionService.prescription;
+    this.prescription = <Prescription>this.prescriptionService.getPrescription();
     console.log(this.prescription);
   }
 
