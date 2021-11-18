@@ -10,7 +10,8 @@
     "e2e": "ng serve && npx cypress run",
     "ci:start-server": "angular-http-server --path ./dist/recept-demo -p 4200",
     "cy:run": "cypress run",
-    "ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200 cy:run"
+    "ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200 cy:run",
+    "ci:docker-test": "docker compose up --abort-on-container-exit --exit-code-from cypress"
   },
   "private": true,
   "dependencies": {

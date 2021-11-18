@@ -1,15 +1,21 @@
 /// <reference types="Cypress" />
 
 describe('Home Page', () => {
-  it('should display the app name on the home page', () => {
+  it('should display header and footer', () => {
     cy.visit('/'); // go to the home page
 
-    // get the rocket element and verify that the app name is in it
     cy.get('nb-layout-header h1')
       .should('contain.text', 'Patiënten administratie');
+    cy.get('nb-layout-footer div.version').should(($div) => {
+      const text = $div.text();
+      expect(text).to.match(/Versie \d+\.\d+\.\d+/);
+    });
+    const year = new Date().getFullYear();
+    cy.get('nb-layout-footer h6')
+      .should('contain.text', year);
   });
 
-  it.only('should show user details after clicking on a row', () => {
+  it('should show user details after clicking on a row', () => {
     cy.visit('/'); // go to the home page
 
     cy.get('nb-list nb-list-item').last().click();

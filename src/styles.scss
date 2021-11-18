@@ -9,6 +9,19 @@
   @include nb-bootstrap-global();
 };
 
+nav {
+  h6 {
+    flex: 1;
+    text-align: center;
+  }
+
+  .version {
+    margin-left: auto;
+    color: gray;
+    font-size: small;
+  }
+}
+
 img.profile-picture {
   height: 100px;
   width: 100px;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import pkg from '../../package.json';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'recept-demo';
+  public version : string = pkg.version;
+  public currentYear : number = new Date().getFullYear();
+  public title = 'recept-demo';
 }
