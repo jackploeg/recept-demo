@@ -7,7 +7,7 @@ import pkg from '../../package.json';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public version : string = pkg.version;
-  public currentYear : number = new Date().getFullYear();
+  public version: string = pkg.version;
+  public currentYear: number = new Date().getFullYear();
   public title = 'recept-demo';
 }

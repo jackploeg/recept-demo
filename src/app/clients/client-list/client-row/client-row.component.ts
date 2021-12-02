@@ -9,7 +9,7 @@ import { Client } from '../../client.model'
 export class ClientRowComponent implements OnInit {
 
   @Input()
-  public client : Client;
+  public client: Client;
 
   @Output()
   clientSelected = new EventEmitter<void>();

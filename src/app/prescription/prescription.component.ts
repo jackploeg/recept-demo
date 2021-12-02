@@ -17,30 +17,30 @@ import { Router } from '@angular/router';
 })
 export class PrescriptionComponent implements OnInit, OnDestroy {
 
-  prescriptionForm : FormGroup;
+  prescriptionForm: FormGroup;
   medicineSubscription: Subscription;
 
   medicines: Medicine[];
   packagings: Packaging[][] = [[]];
 
-  deliveryMethods = [{description:'Afhalen bij apotheek'},{description:'Thuisbezorgen bij patiënt'}];
+  deliveryMethods = [{ description: 'Afhalen bij apotheek' }, { description: 'Thuisbezorgen bij patiënt' }];
 
   constructor(private route: ActivatedRoute,
-              private medicineService: MedicineService,
-              private prescriptionService: PrescriptionService,
-              private router: Router
-             ) { }
+    private medicineService: MedicineService,
+    private prescriptionService: PrescriptionService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.medicineSubscription = this.medicineService.getMedicines()
-        .subscribe( medicines => {
-          this.medicines = medicines;
-        }
-    );
+      .subscribe(medicines => {
+        this.medicines = medicines;
+      }
+      );
     this.initForm();
   }
 
-  ngOnDestroy() : void {
+  ngOnDestroy(): void {
     if (this.medicineSubscription) {
       this.medicineSubscription.unsubscribe();
     }
@@ -48,7 +48,7 @@ export class PrescriptionComponent implements OnInit, OnDestroy {
 
   initForm() {
     let clientNumber = this.route.snapshot.paramMap.get("clientNumber")!;
-    let prescriptionDate= new Date();
+    let prescriptionDate = new Date();
     let endDateValid = new Date();
     endDateValid.setFullYear(endDateValid.getFullYear() + 2);
     let deliveryMethod = '';
@@ -60,7 +60,7 @@ export class PrescriptionComponent implements OnInit, OnDestroy {
       'endDateValid': new FormControl(formatDate(endDateValid, 'dd-MM-yyyy', 'en')),
       'deliveryMethod': new FormControl(null, Validators.required),
       'prescriptionRows': prescriptionRows
-      });
+    });
   }
 
   get prescriptionRowsCtrls() {
@@ -80,30 +80,30 @@ export class PrescriptionComponent implements OnInit, OnDestroy {
 
   deletePrescriptionRow(index: number) {
     (<FormArray>this.prescriptionForm.get('prescriptionRows')).removeAt(index);
-    this.packagings.splice(index,1);
+    this.packagings.splice(index, 1);
   }
 
   medicineChanged(index: number) {
     let selectedMedicine = (<FormArray>this.prescriptionForm.get('prescriptionRows')).controls[index].get('medicine')!.value;
 
-      for (let medicine of this.medicines) {
-        if (selectedMedicine === medicine.description) {
-          this.packagings[index] = medicine.availablePackaging;
-        }
-     }
+    for (let medicine of this.medicines) {
+      if (selectedMedicine === medicine.description) {
+        this.packagings[index] = medicine.availablePackaging;
+      }
+    }
   }
 
   getPackagings(index: number) {
     return this.packagings.length >= index ? this.packagings[index] : [];
   }
 
-  formatPackaging(packaging: Packaging) : string {
-    switch(packaging.unit) {
+  formatPackaging(packaging: Packaging): string {
+    switch (packaging.unit) {
       case 'stuks': {
         return ('stuks');
       }
       case 'poeder': {
-              return ('doos met ' + packaging.quantity + ' poeders ');
+        return ('doos met ' + packaging.quantity + ' poeders ');
       }
       case 'strip': {
         return ('doos met ' + packaging.quantity + ' strips van ' + packaging.quantityPerUnit + ' ' + packaging.subUnit);

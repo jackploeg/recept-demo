@@ -8,18 +8,18 @@ import { PrescriptionService } from './prescription.service';
 fdescribe('PrescriptionComponent', () => {
   let component: PrescriptionComponent;
   let fixture: ComponentFixture<PrescriptionComponent>;
-  let prescriptionService : PrescriptionService;
+  let prescriptionService: PrescriptionService;
   let router;
   let route;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrescriptionComponent ],
+      declarations: [PrescriptionComponent],
       imports: [
-              RouterTestingModule.withRoutes([])
-            ],
+        RouterTestingModule.withRoutes([])
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

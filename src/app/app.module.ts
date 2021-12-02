@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbIconModule, NbCardModule, NbListModule, NbButtonModule,
-         NbSelectModule, NbRadioModule, NbInputModule } from '@nebular/theme';
+import {
+  NbThemeModule, NbLayoutModule, NbIconModule, NbCardModule, NbListModule, NbButtonModule,
+  NbSelectModule, NbRadioModule, NbInputModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { ClientsComponent } from './clients/clients.component';

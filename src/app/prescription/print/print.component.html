@@ -20,8 +20,7 @@
     </div>
     <div class="col"></div>
   </div>
-  <div class="row" *ngFor="let row of prescription.prescriptionRows"
-  class="medicineRow">
+  <div class="row" *ngFor="let row of prescription.prescriptionRows" class="medicineRow">
     <div class="col">
       <h6>{{ row.medicine }}</h6>
       <p>{{ row.quantity }} {{ row.packaging }}</p>

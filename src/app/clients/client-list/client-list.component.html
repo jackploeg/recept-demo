@@ -3,7 +3,8 @@
     Patiënten
   </nb-card-header>
   <nb-list>
-    <nb-list-item *ngFor="let client of clientsService.getClientData() | async" [ngClass]="{'selected': isSelected(client)}">
+    <nb-list-item *ngFor="let client of clientsService.getClientData() | async"
+      [ngClass]="{'selected': isSelected(client)}">
       <app-client-row [client]="client" (clientSelected)="onClientSelected(client)"></app-client-row>
     </nb-list-item>
   </nb-list>

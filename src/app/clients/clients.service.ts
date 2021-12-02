@@ -8,10 +8,10 @@ import { CLIENTS } from '../../mock-data/clients';
 })
 export class ClientsService {
 
-  constructor() {}
+  constructor() { }
 
-  getClientData() : Observable<Client[]> {
-     return of(CLIENTS);
+  getClientData(): Observable<Client[]> {
+    return of(CLIENTS);
   }
 
 }

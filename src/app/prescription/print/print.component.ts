@@ -9,9 +9,9 @@ import { Prescription } from '../prescription.model';
 })
 export class PrintComponent implements OnInit {
 
-  prescription : Prescription;
+  prescription: Prescription;
 
-  constructor( private prescriptionService : PrescriptionService) { }
+  constructor(private prescriptionService: PrescriptionService) { }
 
   ngOnInit(): void {
     this.prescription = <Prescription>this.prescriptionService.getPrescription();

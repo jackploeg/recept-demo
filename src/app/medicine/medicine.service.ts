@@ -9,9 +9,9 @@ import { MEDICINES } from '../../mock-data/medicines';
 })
 export class MedicineService {
 
-  constructor() {}
+  constructor() { }
 
-  getMedicines() : Observable<Medicine[]> {
+  getMedicines(): Observable<Medicine[]> {
     return of(MEDICINES)
   }
 }

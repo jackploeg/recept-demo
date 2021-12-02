@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Client } from '../client.model'
+import { Client } from '../client.model';
 
 @Component({
   selector: 'app-client-details',
@@ -10,9 +10,9 @@ import { Client } from '../client.model'
 export class ClientDetailsComponent implements OnInit {
 
   @Input()
-  public client : Client;
+  public client: Client;
 
-  constructor(private router : Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }

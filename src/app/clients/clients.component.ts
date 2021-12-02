@@ -8,7 +8,7 @@ import { Client } from './client.model';
 })
 export class ClientsComponent implements OnInit {
 
-  public selectedClient : Client;
+  public selectedClient: Client;
 
   constructor() { }
 

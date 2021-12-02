@@ -12,16 +12,16 @@ export class ClientListComponent {
   @Output()
   clientSelectionChanged = new EventEmitter<Client>();
 
-  private selectedClientNumber : number;
+  private selectedClientNumber: number;
 
-  constructor(public clientsService : ClientsService) { }
+  constructor(public clientsService: ClientsService) { }
 
   onClientSelected(client: Client) {
     this.selectedClientNumber = client.clientNumber;
     this.clientSelectionChanged.emit(client);
   }
 
-  isSelected(client : Client) {
+  isSelected(client: Client) {
     return this.selectedClientNumber == client.clientNumber;
   }
 }

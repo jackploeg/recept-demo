@@ -6,13 +6,13 @@ import { PrescriptionService } from '../prescription.service';
 describe('PrintComponent', () => {
   let component: PrintComponent;
   let fixture: ComponentFixture<PrintComponent>;
-  let prescriptionService : PrescriptionService;
+  let prescriptionService: PrescriptionService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrintComponent ]
+      declarations: [PrintComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

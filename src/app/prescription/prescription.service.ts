@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class PrescriptionService {
 
-  public prescription : Object;
+  public prescription: Object;
 
   constructor() { }
 
